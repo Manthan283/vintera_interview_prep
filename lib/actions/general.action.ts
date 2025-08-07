@@ -19,7 +19,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
 
     const { object } = await generateObject({
       model: google("gemini-2.0-flash-001", {
-        structuredOutputs: false,
+        structuredOutputs: true,
       }),
       schema: feedbackSchema,
       prompt: `
@@ -35,7 +35,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
         - **Confidence & Clarity**: Confidence in responses, engagement, and clarity.
         `,
       system:
-        "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
+        "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories and be honest and detailed.",
     });
 
     const feedback = {
